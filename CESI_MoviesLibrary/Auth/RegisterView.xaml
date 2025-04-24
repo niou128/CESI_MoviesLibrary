@@ -15,7 +15,7 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Width="400"
-                Effect="{DynamicResource DropShadowEffect}">
+                Effect="{StaticResource DropShadowEffect}">
 
             <StackPanel>
                 <TextBlock Text="Créer un compte"
@@ -55,11 +55,7 @@
 
                 <Button Content="S'inscrire"
                         Command="{Binding RegisterCommand}"
-                        Background="#4CAF50"
-                        Foreground="White"
-                        Padding="10"
-                        FontWeight="Bold"
-                        Margin="0,0,0,10" />
+                        Style="{StaticResource PrimaryButtonStyle}" />
 
                 <Button Content="Déjà un compte ? Se connecter"
                         Command="{Binding GoToLoginCommand}"

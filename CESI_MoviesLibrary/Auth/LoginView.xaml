@@ -15,7 +15,7 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Width="400"
-                Effect="{DynamicResource DropShadowEffect}">
+                Effect="{StaticResource DropShadowEffect}">
 
             <StackPanel>
                 <TextBlock Text="Connexion"
@@ -46,20 +46,11 @@
 
                 <Button Content="Se connecter"
                         Command="{Binding LoginCommand}"
-                        Background="#4CAF50"
-                        Foreground="White"
-                        Padding="10"
-                        FontWeight="Bold"
-                        Margin="0,0,0,10" />
+                        Style="{StaticResource PrimaryButtonStyle}" />
 
                 <Button Content="Créer un compte"
                         Command="{Binding GoToRegisterCommand}"
-                        Background="Transparent"
-                        Foreground="#2196F3"
-                        BorderBrush="#2196F3"
-                        BorderThickness="1"
-                        Padding="10"
-                        FontWeight="Bold" />
+                        Style="{StaticResource SecondaryButtonStyle}" />
             </StackPanel>
         </Border>
     </Grid>

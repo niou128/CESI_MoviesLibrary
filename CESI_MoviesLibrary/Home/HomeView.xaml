@@ -9,8 +9,8 @@
     
     <Grid>
         <Grid.Margin>
-            <Thickness>20</Thickness>
-        </Grid.Margin>
+        <Thickness>20</Thickness>
+    </Grid.Margin>
         <StackPanel>
             <TextBlock Text="Bienvenue sur Movie Library 🎬"
                        FontSize="26"
@@ -21,9 +21,7 @@
                     Command="{Binding GoToLoginCommand}"
                     Width="150"
                     Padding="10"
-                    Background="#4CAF50"
-                    Foreground="White"
-                    Margin="0,0,0,20" />
+                    Style="{StaticResource PrimaryButtonStyle}" />
 
             <ItemsControl ItemsSource="{Binding RandomMovies}">
                 <ItemsControl.ItemTemplate>

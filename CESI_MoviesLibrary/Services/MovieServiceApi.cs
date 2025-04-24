@@ -1,4 +1,5 @@
-﻿using CESI_MoviesLibrary.Models;
+﻿using CESI_MoviesLibrary.Dtos;
+using CESI_MoviesLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,20 +51,6 @@ namespace CESI_MoviesLibrary.Services
                 Overview = dto.overview,
                 PosterPath = $"https://image.tmdb.org/t/p/w500{dto.poster_path}"
             };
-        }
-
-        // DTO internes
-        private class TmdbMovieResponse
-        {
-            public List<TmdbMovieDto> results { get; set; }
-        }
-
-        private class TmdbMovieDto
-        {
-            public int id { get; set; }
-            public string title { get; set; }
-            public string overview { get; set; }
-            public string poster_path { get; set; }
         }
     }
 }

@@ -3,17 +3,11 @@ using CESI_MoviesLibrary.Data;
 using CESI_MoviesLibrary.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CESI_MoviesLibrary.ViewModels
 {
     public partial class LoginViewModel : ObservableObject
     {
-        //new MovieServiceJson("Data/movies.json")
         private readonly AuthService _authService;
         private readonly NavigationService _navigationService;
 
@@ -39,6 +33,7 @@ namespace CESI_MoviesLibrary.ViewModels
                     var apiKey = config.ApiKeys.TheMovieDb;
                     _navigationService.NavigateTo(
                         new DashboardViewModel(
+                            //new MovieServiceJson("Data/movies.json"),
                             new MovieServiceApi(apiKey),
                             new AppDbContext(),
                             user,

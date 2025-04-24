@@ -1,0 +1,32 @@
+[
+  {
+    "Id": 1,
+    "Title": "Inception",
+    "Overview": "A thief who steals corporate secrets through use of dream-sharing technology.",
+    "PosterPath": "/poster1.jpg"
+  },
+  {
+    "Id": 2,
+    "Title": "The Matrix",
+    "Overview": "A computer hacker learns about the true nature of his reality.",
+    "PosterPath": "/poster2.jpg"
+  },
+  {
+    "Id": 3,
+    "Title": "Interstellar",
+    "Overview": "A team of explorers travel through a wormhole in space.",
+    "PosterPath": "/poster3.jpg"
+  },
+  {
+    "Id": 4,
+    "Title": "The Dark Knight",
+    "Overview": "Batman faces the Joker in a battle for Gotham's soul.",
+    "PosterPath": "/poster4.jpg"
+  },
+  {
+    "Id": 5,
+    "Title": "Pulp Fiction",
+    "Overview": "The lives of two mob hitmen intertwine in four tales of violence and redemption.",
+    "PosterPath": "/poster5.jpg"
+  }
+]

@@ -34,5 +34,11 @@ namespace CESI_MoviesLibrary.ViewModels
                 _navigationService.NavigateTo(new LoginViewModel(_authService, _navigationService));
             }
         }
+
+        [RelayCommand]
+        private void GoToLogin()
+        {
+            _navigationService.NavigateTo(new LoginViewModel(_authService, _navigationService));
+        }
     }
 }

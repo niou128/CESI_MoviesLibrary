@@ -4,13 +4,8 @@ using CESI_MoviesLibrary.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.DirectoryServices;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NavigationService = CESI_MoviesLibrary.Services.NavigationService;
 
 namespace CESI_MoviesLibrary.ViewModels
 {
@@ -19,6 +14,8 @@ namespace CESI_MoviesLibrary.ViewModels
         private readonly IMovieService _movieService;
         private readonly AppDbContext _db;
         private readonly User _currentUser;
+        private readonly AuthService _authService;
+        private readonly NavigationService _navigationService;
 
         [ObservableProperty] private string searchQuery;
         [ObservableProperty] private ObservableCollection<string> movieSuggestions = new();
@@ -29,11 +26,13 @@ namespace CESI_MoviesLibrary.ViewModels
         [ObservableProperty] private Movie selectedSeenMovie;
         [ObservableProperty] private Movie selectedWishlistMovie;
 
-        public DashboardViewModel(IMovieService movieService, AppDbContext db, User user)
+        public DashboardViewModel(IMovieService movieService, AppDbContext db, User user, AuthService authService, NavigationService navigationService)
         {
             _movieService = movieService;
             _db = db;
             _currentUser = user;
+            _authService = authService;
+            _navigationService = navigationService;
 
             LoadUserMovies();
         }
@@ -70,6 +69,8 @@ namespace CESI_MoviesLibrary.ViewModels
                 SaveUserMovie(SelectedSearchResult, "Seen");
                 SeenMovies.Add(SelectedSearchResult);
             }
+
+            ClearSearch();
         }
 
         [RelayCommand]
@@ -80,6 +81,8 @@ namespace CESI_MoviesLibrary.ViewModels
                 SaveUserMovie(SelectedSearchResult, "ToWatch");
                 WishlistMovies.Add(SelectedSearchResult);
             }
+
+            ClearSearch();
         }
 
         [RelayCommand]
@@ -115,9 +118,16 @@ namespace CESI_MoviesLibrary.ViewModels
             }
         }
 
+        [RelayCommand]
+        private void Logout()
+        {
+            _navigationService.NavigateTo(new LoginViewModel(_authService, _navigationService));
+        }
+
         private void SaveUserMovie(Movie movie, string status)
         {
-            // Vérifie si le film existe déjà dans la BDD
+            if (movie == null) return;
+
             var entity = _db.Movies.Find(movie.Id);
             if (entity == null)
             {
@@ -132,7 +142,6 @@ namespace CESI_MoviesLibrary.ViewModels
                 _db.SaveChanges();
             }
 
-            // Vérifie si la relation existe déjà
             var existing = _db.UserMovies.FirstOrDefault(um => um.UserId == _currentUser.Id && um.MovieId == movie.Id);
             if (existing == null)
             {
@@ -161,6 +170,14 @@ namespace CESI_MoviesLibrary.ViewModels
                 _db.UserMovies.Remove(entry);
                 _db.SaveChanges();
             }
+        }
+
+        private void ClearSearch()
+        {
+            SearchQuery = string.Empty;
+            SearchResults.Clear();
+            SelectedSearchResult = null;
+            MovieSuggestions.Clear();
         }
     }
 }

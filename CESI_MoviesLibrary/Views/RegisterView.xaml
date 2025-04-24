@@ -6,22 +6,70 @@
              xmlns:local="clr-namespace:CESI_MoviesLibrary.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel Margin="20">
-        <TextBlock Text="Créer un compte"
-                   FontSize="24"
-                   Margin="0,0,0,20" />
-        <TextBlock Text="Nom" />
-        <TextBox Text="{Binding Name, Mode=TwoWay}"
-                 Margin="0,0,0,10" />
+    <Grid>
+        <Border Background="White"
+                Padding="30"
+                CornerRadius="12"
+                BorderBrush="#DDD"
+                BorderThickness="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Width="400"
+                Effect="{DynamicResource DropShadowEffect}">
 
-        <TextBlock Text="Email" />
-        <TextBox Text="{Binding Email, Mode=TwoWay}"
-                 Margin="0,0,0,10" />
-        <TextBlock Text="Mot de passe" />
-        <PasswordBox x:Name="RegisterPasswordBox"
-                     Margin="0,0,0,10"
-                     PasswordChanged="PasswordBox_PasswordChanged" />
-        <Button Content="S'inscrire"
-                Command="{Binding RegisterCommand}" />
-    </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Créer un compte"
+                           FontSize="26"
+                           FontWeight="Bold"
+                           Foreground="#333"
+                           Margin="0,0,0,20"
+                           HorizontalAlignment="Center" />
+
+                <TextBlock Text="Nom"
+                           Margin="0,0,0,5" />
+                <TextBox Text="{Binding Name, Mode=TwoWay}"
+                         Height="35"
+                         Margin="0,0,0,15"
+                         Padding="8"
+                         BorderBrush="#CCC"
+                         BorderThickness="1" />
+
+                <TextBlock Text="Email"
+                           Margin="0,0,0,5" />
+                <TextBox Text="{Binding Email, Mode=TwoWay}"
+                         Height="35"
+                         Margin="0,0,0,15"
+                         Padding="8"
+                         BorderBrush="#CCC"
+                         BorderThickness="1" />
+
+                <TextBlock Text="Mot de passe"
+                           Margin="0,0,0,5" />
+                <PasswordBox x:Name="RegisterPasswordBox"
+                             Height="35"
+                             Margin="0,0,0,20"
+                             Padding="8"
+                             PasswordChanged="PasswordBox_PasswordChanged"
+                             BorderBrush="#CCC"
+                             BorderThickness="1" />
+
+                <Button Content="S'inscrire"
+                        Command="{Binding RegisterCommand}"
+                        Background="#4CAF50"
+                        Foreground="White"
+                        Padding="10"
+                        FontWeight="Bold"
+                        Margin="0,0,0,10" />
+
+                <Button Content="Déjà un compte ? Se connecter"
+                        Command="{Binding GoToLoginCommand}"
+                        Background="Transparent"
+                        Foreground="#2196F3"
+                        BorderBrush="#2196F3"
+                        BorderThickness="1"
+                        Padding="10"
+                        FontWeight="Bold" />
+            </StackPanel>
+        </Border>
+    </Grid>
 </UserControl>

@@ -7,22 +7,60 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <StackPanel Margin="20">
-            <TextBlock Text="Connexion"
-                       FontSize="24"
-                       Margin="0,0,0,20" />
-            <TextBlock Text="Email"
-                           FontWeight="Bold" />
-            <TextBox Text="{Binding Email, Mode=TwoWay}"
-                     Margin="0,0,0,10" />
-            <PasswordBox x:Name="PasswordBox"
-                         Margin="0,0,0,10"
-                         PasswordChanged="PasswordBox_PasswordChanged" />
-            <Button Content="Se connecter"
-                    Command="{Binding LoginCommand}"
-                    Margin="0,0,0,10" />
-            <Button Content="Créer un compte"
-                    Command="{Binding GoToRegisterCommand}" />
-        </StackPanel>
+        <Border Background="White"
+                Padding="30"
+                CornerRadius="12"
+                BorderBrush="#DDD"
+                BorderThickness="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Width="400"
+                Effect="{DynamicResource DropShadowEffect}">
+
+            <StackPanel>
+                <TextBlock Text="Connexion"
+                           FontSize="26"
+                           FontWeight="Bold"
+                           Foreground="#333"
+                           Margin="0,0,0,20"
+                           HorizontalAlignment="Center" />
+
+                <TextBlock Text="Email"
+                           Margin="0,0,0,5" />
+                <TextBox Text="{Binding Email, Mode=TwoWay}"
+                         Height="35"
+                         Margin="0,0,0,15"
+                         Padding="8"
+                         BorderBrush="#CCC"
+                         BorderThickness="1" />
+
+                <TextBlock Text="Mot de passe"
+                           Margin="0,0,0,5" />
+                <PasswordBox x:Name="PasswordBox"
+                             Height="35"
+                             Margin="0,0,0,20"
+                             Padding="8"
+                             PasswordChanged="PasswordBox_PasswordChanged"
+                             BorderBrush="#CCC"
+                             BorderThickness="1" />
+
+                <Button Content="Se connecter"
+                        Command="{Binding LoginCommand}"
+                        Background="#4CAF50"
+                        Foreground="White"
+                        Padding="10"
+                        FontWeight="Bold"
+                        Margin="0,0,0,10" />
+
+                <Button Content="Créer un compte"
+                        Command="{Binding GoToRegisterCommand}"
+                        Background="Transparent"
+                        Foreground="#2196F3"
+                        BorderBrush="#2196F3"
+                        BorderThickness="1"
+                        Padding="10"
+                        FontWeight="Bold" />
+            </StackPanel>
+        </Border>
     </Grid>
 </UserControl>

@@ -14,13 +14,13 @@ namespace CESI_MoviesLibrary.Services
             _filePath = filePath;
         }
 
-        public async Task<List<Movie>> GetRandomMoviesAsync()
+        public async Task<IEnumerable<Movie>> GetRandomMoviesAsync()
         {
             await EnsureMoviesLoaded();
             return _cachedMovies!.OrderBy(_ => Guid.NewGuid()).Take(10).ToList();
         }
 
-        public async Task<List<Movie>> SearchMoviesAsync(string query)
+        public async Task<IEnumerable<Movie>> SearchMoviesAsync(string query)
         {
             await EnsureMoviesLoaded();
             return _cachedMovies!

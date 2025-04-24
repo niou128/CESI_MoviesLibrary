@@ -21,5 +21,9 @@
         <DataTemplate DataType="{x:Type viewmodels:DashboardViewModel}">
             <views:DashboardView />
         </DataTemplate>
+        <DropShadowEffect x:Key="DropShadowEffect"
+                          BlurRadius="10"
+                          ShadowDepth="3"
+                          Opacity="0.3" />
     </Application.Resources>
 </Application>

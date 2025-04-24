@@ -4,23 +4,48 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CESI_MoviesLibrary.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d"
+             Background="#FAFAFA">
+    
     <Grid>
-        <ListBox ItemsSource="{Binding Movies}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Margin="5">
-                        <TextBlock Text="{Binding Title}"
-                                   FontWeight="Bold"
-                                   FontSize="16" />
-                        <TextBlock Text="{Binding Overview}"
-                                   TextWrapping="Wrap"
-                                   FontSize="12"
-                                   MaxHeight="60" />
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        <Grid.Margin>
+            <Thickness>20</Thickness>
+        </Grid.Margin>
+        <StackPanel>
+            <TextBlock Text="Bienvenue sur Movie Library 🎬"
+                       FontSize="26"
+                       FontWeight="Bold"
+                       Margin="0,0,0,20" />
+
+            <Button Content="Se connecter"
+                    Command="{Binding GoToLoginCommand}"
+                    Width="150"
+                    Padding="10"
+                    Background="#4CAF50"
+                    Foreground="White"
+                    Margin="0,0,0,20" />
+
+            <ItemsControl ItemsSource="{Binding RandomMovies}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="0,0,0,10">
+                            <Image Source="{Binding PosterPath}"
+                                   Width="80"
+                                   Height="120"
+                                   Margin="0,0,10,0" />
+                            <StackPanel>
+                                <TextBlock Text="{Binding Title}"
+                                           FontWeight="Bold" />
+                                <TextBlock Text="{Binding Overview}"
+                                           TextWrapping="Wrap"
+                                           MaxWidth="400"
+                                           FontSize="11" />
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
     </Grid>
 </UserControl>

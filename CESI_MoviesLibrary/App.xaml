@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:CESI_MoviesLibrary"
              xmlns:viewmodels="clr-namespace:CESI_MoviesLibrary.ViewModels"
-             xmlns:views="clr-namespace:CESI_MoviesLibrary.Views"
-             StartupUri="MainWindow.xaml">
+             xmlns:views="clr-namespace:CESI_MoviesLibrary.Views">
     <Application.Resources>
         <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
             <views:LoginView />

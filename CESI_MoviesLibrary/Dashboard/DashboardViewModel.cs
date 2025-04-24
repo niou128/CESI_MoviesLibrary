@@ -1,4 +1,5 @@
-﻿using CESI_MoviesLibrary.Data;
+﻿using CESI_MoviesLibrary.Core.ViewModels;
+using CESI_MoviesLibrary.Data;
 using CESI_MoviesLibrary.Models;
 using CESI_MoviesLibrary.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -9,7 +10,7 @@ using NavigationService = CESI_MoviesLibrary.Services.NavigationService;
 
 namespace CESI_MoviesLibrary.ViewModels
 {
-    public partial class DashboardViewModel : ObservableObject
+    public partial class DashboardViewModel : BaseViewModel
     {
         private readonly IMovieService _movieService;
         private readonly AppDbContext _db;
@@ -39,12 +40,24 @@ namespace CESI_MoviesLibrary.ViewModels
 
         private void LoadUserMovies()
         {
-            var movies = _db.UserMovies.Include(um => um.Movie)
-                                       .Where(um => um.UserId == _currentUser.Id)
-                                       .ToList();
+            SetBusy();
+            try
+            {
+                var movies = _db.UserMovies.Include(um => um.Movie)
+                                           .Where(um => um.UserId == _currentUser.Id)
+                                           .ToList();
 
-            SeenMovies = new ObservableCollection<Movie>(movies.Where(m => m.Status == "Seen").Select(m => m.Movie));
-            WishlistMovies = new ObservableCollection<Movie>(movies.Where(m => m.Status == "ToWatch").Select(m => m.Movie));
+                SeenMovies = new ObservableCollection<Movie>(movies.Where(m => m.Status == "Seen").Select(m => m.Movie));
+                WishlistMovies = new ObservableCollection<Movie>(movies.Where(m => m.Status == "ToWatch").Select(m => m.Movie));
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage = "Erreur de chargement : " + ex.Message;
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
 
         [RelayCommand]

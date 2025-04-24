@@ -3,13 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:CESI_MoviesLibrary"
              xmlns:viewmodels="clr-namespace:CESI_MoviesLibrary.ViewModels"
-             xmlns:views="clr-namespace:CESI_MoviesLibrary.Views">
+             xmlns:views="clr-namespace:CESI_MoviesLibrary.Views"
+             xmlns:converter="clr-namespace:CESI_MoviesLibrary.Core.Converter">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles.xaml" />
                 <ResourceDictionary Source="Resources/Effects.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
 
             <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
                 <views:LoginView />

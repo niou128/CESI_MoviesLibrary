@@ -1,20 +1,19 @@
-﻿using CESI_MoviesLibrary.ViewModels;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace CESI_MoviesLibrary.Services
 {
     public class NavigationService
     {
-        private readonly MainViewModel _mainViewModel;
+        private readonly INavigationHost _host;
 
-        public NavigationService(MainViewModel mainViewModel)
+        public NavigationService(INavigationHost host)
         {
-            _mainViewModel = mainViewModel;
+            _host = host;
         }
 
         public void NavigateTo(ObservableObject viewModel)
         {
-            _mainViewModel.CurrentViewModel = viewModel;
+            _host.CurrentViewModel = viewModel;
         }
     }
 }

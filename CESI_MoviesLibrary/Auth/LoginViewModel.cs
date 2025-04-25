@@ -1,12 +1,8 @@
-﻿using CESI_MoviesLibrary.Data;
+﻿using CESI_MoviesLibrary.Configuration;
+using CESI_MoviesLibrary.Data;
 using CESI_MoviesLibrary.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CESI_MoviesLibrary.ViewModels
 {
@@ -30,13 +26,21 @@ namespace CESI_MoviesLibrary.ViewModels
             var success = await _authService.LoginAsync(Email, Password);
             if (success)
             {
-                _navigationService.NavigateTo(
-                    new DashboardViewModel(
-                        new MovieServiceJson("Data/movies.json"),
-                        new AppDbContext(),
-                        await _authService.GetUserByEmailAsync(Email)
-    )
-);
+                var user = await _authService.GetUserByEmailAsync(Email);
+                if (user != null)
+                {
+                    var config = AppConfiguration.Load();
+                    var apiKey = config.ApiKeys.TheMovieDb;
+                    _navigationService.NavigateTo(
+                        new DashboardViewModel(
+                            //new MovieServiceJson("Data/movies.json"),
+                            new MovieServiceApi(apiKey),
+                            new AppDbContext(),
+                            user,
+                            _authService,
+                            _navigationService
+                        ));
+                }
             }
         }
 

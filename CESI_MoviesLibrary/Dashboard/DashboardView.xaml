@@ -1,0 +1,198 @@
+﻿<UserControl x:Class="CESI_MoviesLibrary.Views.DashboardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CESI_MoviesLibrary.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Bandeau supérieur -->
+        <DockPanel Grid.Row="0"
+                   Margin="0,0,0,10">
+            <TextBlock Text="🎬 Ma bibliothèque de films"
+                       FontSize="24"
+                       FontWeight="Bold"
+                       VerticalAlignment="Center" />
+            <Button Content="Déconnexion"
+                    Command="{Binding LogoutCommand}"
+                    HorizontalAlignment="Right"
+                    DockPanel.Dock="Right"
+                    Padding="10,5"
+                    Margin="10,0,0,0"
+                    Background="#FF5A5F"
+                    Foreground="White" />
+        </DockPanel>
+
+        <!-- Barre de recherche -->
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="1"
+                    Margin="0,0,0,10">
+            <ComboBox IsEditable="True"
+                      Width="300"
+                      ItemsSource="{Binding MovieSuggestions}"
+                      Text="{Binding SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      Margin="0,0,10,0" />
+            <Button Content="🔍 Rechercher"
+                    Command="{Binding UpdateSuggestionsCommand}"
+                    Padding="10,5"
+                    Background="#2196F3"
+                    Foreground="White" />
+        </StackPanel>
+
+        <!-- Corps principal -->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Résultats -->
+            <StackPanel Grid.Column="0"
+                        Margin="5">
+                <TextBlock Text="🔎 Résultats"
+                           FontWeight="Bold"
+                           Margin="0,0,0,5" />
+                <Border Background="White"
+                        CornerRadius="8"
+                        Padding="5"
+                        BorderBrush="#DDD"
+                        BorderThickness="1"
+                        Effect="{DynamicResource DropShadowEffect}">
+                    <ListBox ItemsSource="{Binding SearchResults}"
+                             SelectedItem="{Binding SelectedSearchResult}"
+                             Height="200">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal"
+                                            Margin="5">
+                                    <Image Source="{Binding PosterPath}"
+                                           Width="60"
+                                           Height="90"
+                                           Margin="0,0,10,0" />
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Title}"
+                                                   FontWeight="Bold" />
+                                        <TextBlock Text="{Binding Overview}"
+                                                   FontSize="11"
+                                                   TextWrapping="Wrap"
+                                                   MaxHeight="60" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Border>
+                <StackPanel Orientation="Horizontal"
+                            Margin="0,5,0,0">
+                    <Button Content="✅ Vus"
+                            Command="{Binding AddSelectedMovieToSeenCommand}"
+                            Margin="0,0,10,0"
+                            Background="#4CAF50"
+                            Foreground="White"
+                            Padding="10,5" />
+                    <Button Content="📌 À voir"
+                            Command="{Binding AddSelectedMovieToWishlistCommand}"
+                            Background="#FFC107"
+                            Foreground="Black"
+                            Padding="10,5" />
+                </StackPanel>
+            </StackPanel>
+
+            <ProgressBar Grid.Row="1"
+                         Height="4"
+                         Margin="0,0,0,5"
+                         IsIndeterminate="True"
+                         Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}" />
+
+            <!-- Vus -->
+            <GroupBox Header="🎬 Films vus"
+                      Grid.Column="1"
+                      Margin="5">
+                <StackPanel>
+                    <ListBox ItemsSource="{Binding SeenMovies}"
+                             SelectedItem="{Binding SelectedSeenMovie}"
+                             Height="250">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal"
+                                            Margin="5">
+                                    <Image Source="{Binding PosterPath}"
+                                           Width="60"
+                                           Height="90"
+                                           Margin="0,0,10,0" />
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Title}"
+                                                   FontWeight="Bold" />
+                                        <TextBlock Text="{Binding Overview}"
+                                                   FontSize="11"
+                                                   TextWrapping="Wrap"
+                                                   MaxHeight="60" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Button Content="🗑️ Supprimer"
+                            Command="{Binding RemoveFromSeenCommand}"
+                            Margin="0,5,0,0"
+                            Background="#E53935"
+                            Foreground="White"
+                            Padding="10,5" />
+                </StackPanel>
+            </GroupBox>
+
+            <!-- À voir -->
+            <GroupBox Header="📌 À voir"
+                      Grid.Column="2"
+                      Margin="5">
+                <StackPanel>
+                    <ListBox ItemsSource="{Binding WishlistMovies}"
+                             SelectedItem="{Binding SelectedWishlistMovie}"
+                             Height="250">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal"
+                                            Margin="5">
+                                    <Image Source="{Binding PosterPath}"
+                                           Width="60"
+                                           Height="90"
+                                           Margin="0,0,10,0" />
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Title}"
+                                                   FontWeight="Bold" />
+                                        <TextBlock Text="{Binding Overview}"
+                                                   FontSize="11"
+                                                   TextWrapping="Wrap"
+                                                   MaxHeight="60" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0,5,0,0">
+                        <Button Content="🗑️ Supprimer"
+                                Command="{Binding RemoveFromWishlistCommand}"
+                                Margin="0,0,10,0"
+                                Background="#E53935"
+                                Foreground="White"
+                                Padding="10,5" />
+                        <Button Content="✅ Marquer comme vu"
+                                Command="{Binding MoveToSeenCommand}"
+                                Background="#4CAF50"
+                                Foreground="White"
+                                Padding="10,5" />
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+        </Grid>
+    </Grid>
+</UserControl>

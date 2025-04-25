@@ -4,22 +4,17 @@
              xmlns:local="clr-namespace:CESI_MoviesLibrary"
              xmlns:viewmodels="clr-namespace:CESI_MoviesLibrary.ViewModels"
              xmlns:views="clr-namespace:CESI_MoviesLibrary.Views"
-             StartupUri="MainWindow.xaml">
+             xmlns:converter="clr-namespace:CESI_MoviesLibrary.Core.Converter">
     <Application.Resources>
-        <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
-            <views:LoginView />
-        </DataTemplate>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles.xaml" />
+                <ResourceDictionary Source="Resources/Effects.xaml" />
+                <ResourceDictionary Source="Resources/ViewTemplates.xaml" />
+            </ResourceDictionary.MergedDictionaries>
 
-        <DataTemplate DataType="{x:Type viewmodels:RegisterViewModel}">
-            <views:RegisterView />
-        </DataTemplate>
+            <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
 
-        <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
-            <views:HomeView />
-        </DataTemplate>
-
-        <DataTemplate DataType="{x:Type viewmodels:DashboardViewModel}">
-            <views:DashboardView />
-        </DataTemplate>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

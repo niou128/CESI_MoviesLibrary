@@ -10,25 +10,11 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles.xaml" />
                 <ResourceDictionary Source="Resources/Effects.xaml" />
+                <ResourceDictionary Source="Resources/ViewTemplates.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
 
-            <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
-                <views:LoginView />
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type viewmodels:RegisterViewModel}">
-                <views:RegisterView />
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
-                <views:HomeView />
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type viewmodels:DashboardViewModel}">
-                <views:DashboardView />
-            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -47,10 +47,9 @@ CESI_MoviesLibrary/
 Chaque fonctionnalité suit le pattern :
 
 ```
-Features/
-├── MaFeature/
-│   ├── MaFeatureView.xaml
-│   ├── MaFeatureViewModel.cs
+MaFonction/
+├── MaFonctionView.xaml
+├── MaFonctionViewModel.cs
 ```
 
 Les vues sont automatiquement liées aux ViewModels via des `DataTemplate` définis dans `Resources/ViewTemplates.xaml`.
